@@ -106,14 +106,16 @@ class Swimming(Training):
 
 def read_package(workout_type: str, data: list) -> Training:
     """Прочитать данные полученные от датчиков."""
-    workout_dict = {'SWM': Swimming,
-                    'RUN': Running,
-                    'WLK': SportsWalking}
+    workout_dict = {
+        'SWM': Swimming,
+        'RUN': Running,
+        'WLK': SportsWalking
+    }
     if workout_type not in workout_dict:
-        raise ValueError("Такой тренировки нет")
-    else:
-        workout_class: Training = workout_dict[workout_type](*data)
-        return workout_class
+        raise ValueError(f'Тренировка "{workout_type}"'
+                         f' не досутпна для отслеживания')
+    workout_class: Training = workout_dict[workout_type](*data)
+    return workout_class
 
 
 def main(training: Training) -> None:
